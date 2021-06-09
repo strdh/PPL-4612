@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2021 at 12:59 PM
+-- Generation Time: Jun 10, 2021 at 12:11 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -78,6 +78,16 @@ CREATE TABLE `games` (
   `covers` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `games`
+--
+
+INSERT INTO `games` (`id`, `title`, `description`, `release_date`, `difficulty`, `publisher_id`, `rating_Age`, `ratings`, `covers`) VALUES
+(1, 'Free Fire', 'Frefire adalah game fps', '2021-06-10', 'Easy', 1, 13, 4, '1.jpg'),
+(2, 'Genshin Impact', 'Default', '2021-06-10', 'Medium', 1, 15, 4, '2.jpg'),
+(3, 'Minecraft', 'Default', '2021-06-10', 'Medium', 1, 15, 4, 'dummy.jpg'),
+(4, 'Dota 2', 'Default', '2021-06-10', 'Hard', 1, 15, 4, '3.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -110,10 +120,18 @@ CREATE TABLE `game_category` (
 
 CREATE TABLE `game_publisher` (
   `id` int(11) NOT NULL,
-  `name` int(50) NOT NULL,
-  `description` int(100) NOT NULL,
-  `country` varchar(30) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `country` varchar(30) DEFAULT NULL,
+  `cover` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `game_publisher`
+--
+
+INSERT INTO `game_publisher` (`id`, `name`, `description`, `country`, `cover`) VALUES
+(1, 'None', 'This is default', NULL, 'dummy.jpg');
 
 -- --------------------------------------------------------
 
@@ -225,7 +243,7 @@ ALTER TABLE `forums_comments`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `game_categories`
@@ -243,7 +261,7 @@ ALTER TABLE `game_category`
 -- AUTO_INCREMENT for table `game_publisher`
 --
 ALTER TABLE `game_publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -3,13 +3,13 @@
   class User extends CI_Controller {
     public function __construct(){
         parent:: __construct();
-        //$this->load->model('user_model');
+        $this->load->model('user_model');
 
-        if ($this->session->userdata('id') === NULL ) {
-          redirect(base_url('login'));
-        }
+        // if ($this->session->userdata('id') === NULL ) {
+        //   redirect(base_url('login'));
+        // }
 
-        $this->admin = ($this->session->userdata('admin') != NULL) ? true : false;
+        // $this->admin = ($this->session->userdata('admin') != NULL) ? true : false;
       }
 
       public function profile($id){
@@ -22,5 +22,13 @@
         //$this->load->view('templates/header', $title);
         $this->load->view('users/profile');
         //$this->load->view('templates/footer');
+      }
+
+      public function home()
+      {
+        $data['games'] = $this->user_model->getAllGames();
+        $this->load->view('templates/userheader');
+        $this->load->view('users/index', $data);
+        $this->load->view('templates/userfooter');
       }
   }
