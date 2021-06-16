@@ -6,7 +6,7 @@
                         <img class="uk-height-medium" src="<?php echo base_url('asset/src/images/'.$game["covers"]) ?>" width="" height="" alt="">
                     </div>
                     <div class="uk-card-body">
-                        <h3 class="uk-card-title"><?php echo base_url() ?></h3>
+                        <h3 class="uk-card-title"><?php echo $game["title"] ?></h3>
                     </div>
                 </div>
             </div>

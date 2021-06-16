@@ -65,8 +65,45 @@ class Auth extends CI_Controller{
         }
   }
 
-  public function logout(){
+  public function loginAdmin(){
+    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+
+    if ($this->form_validation->run() === FALSE) {
+      $this->load->view('auth/loginadmin');
+    }else{
+      $username_check = $this->auth_model->check_username('admin', $this->input->post('username'));
+      if ($username_check) {
+        $isPasswordTrue = password_verify($this->input->post('password'), $username_check->password);
+        if ($isPasswordTrue) {
+          $session_user = array(
+            'id' => $username_check->id,
+            'username' => $this->input->post('username'),
+            'login_status' => TRUE,
+            'admin' => TRUE
+          );
+          $this->session->set_userdata($session_user);
+          redirect(base_url('adminhome'));
+        }else{
+          $this->session->set_userdata('msg', TRUE);
+          redirect(base_url('loginadmin'));
+        }
+      }else{
+        $this->session->set_userdata('msg', TRUE);
+        redirect(base_url('loginadmin'));
+      }
+    }
+  }
+
+  public function logout()
+  {
     $this->session->sess_destroy();
     redirect(base_url('login'));
+  }
+
+  public function logoutadmin()
+  {
+    $this->session->sess_destroy();
+    redirect(base_url('loginadmin'));
   }
 }
