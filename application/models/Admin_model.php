@@ -13,5 +13,13 @@
             ->get()
             ->result_array();
     }
+
+    public function publishers()
+    {
+      $this->db->order_by('id', 'DESC');
+      return $this->db->from('game_publisher')
+              ->get()
+              ->result_array();
+    }
     
   }

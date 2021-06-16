@@ -31,4 +31,13 @@
         $this->load->view('templates/adminfooter');
     }
 
+    public function publisher()
+    {
+      $page['title'] = 'Admin Publisher';
+      $data["publishers"] = $this->admin_model->publishers();
+      $this->load->view('templates/adminheader', $page);
+      $this->load->view('admin/publisher', $data);
+      $this->load->view('templates/adminfooter');
+    }
+
   }

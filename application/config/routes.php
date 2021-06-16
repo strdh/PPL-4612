@@ -14,6 +14,7 @@ $route['loginadmin'] = 'auth/loginAdmin';
 $route['adminhome'] = 'admin/home';
 $route['logoutadmin'] = 'auth/logoutadmin';
 $route['management/games'] = 'admin/games';
+$route['management/publishers'] = 'admin/publisher';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
