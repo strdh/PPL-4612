@@ -8,8 +8,14 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-body">
-                    <a href="" class="btn btn-success">Tambah</a>                .
+                    <a href="<?php echo base_url('management/publishers/create') ?>" class="btn btn-success">Tambah</a>                .
                 </div>
+                <?php if ($this->session->flashdata('success')) : ?>
+                        <div class="alert alert-success alert-dismissible fade show col-sm-5" role="alert">
+                            <?php echo $this->session->flashdata('success') ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
             </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -21,9 +27,8 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th>Deskripsi</th>
                                 <th>Negara</th>
-                                <th>Gambar</th>
+                                <th>Detail</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,10 +36,17 @@
                            <?php foreach($publishers as $data): ?>
                                 <tr>
                                     <td><?php echo $data["name"] ?></td>
-                                    <td><?php echo $data["description"] ?></td>
                                     <td><?php echo $data["country"] ?></td>
-                                    <td><a href=""><i class="fas fa-eye"></i></a></td>
-                                    <td></td>
+                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#modal<?php echo $data["id"] ?>"><i class="fas fa-eye"></i></a></td>
+                                    <td>
+                                        <a href="<?php echo base_url('management/publishers/edit/').$data['id'] ?>">
+                                            <i class="fas fa-edit"></i>Edit
+                                        </a>
+                                        |
+                                        <a href="<?php echo base_url('management/publishers/delete/').$data['id'] ?>" onclick="return confirm('Yakin ingin dihapus')">
+                                            <i class="fas fa-trash-alt"></i>Hapus
+                                        </a>
+                                    </td>
                                 </tr>
                                 <div class="modal fade" id="modal<?php echo $data["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -44,7 +56,16 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            
+                                            <h4><?php echo $data["name"] ?></h4>
+                                            <?php echo $data["description"] ?>
+                             
+                                            <div>
+                                                <?php if ($data["cover"] != NULL) :?>
+                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/'.$data["cover"]) ?>" alt="">
+                                                <?php else : ?>
+                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/dummy.jpg') ?>" alt="">
+                                                <?php endif ?>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                         </div>
@@ -58,3 +79,4 @@
             </div>
         </div>
     </main>
+    

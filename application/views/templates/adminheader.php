@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?php echo base_url('asset/css/') ?>style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="//cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
         
     </head>
     <body class="sb-nav-fixed">

@@ -15,6 +15,10 @@ $route['adminhome'] = 'admin/home';
 $route['logoutadmin'] = 'auth/logoutadmin';
 $route['management/games'] = 'admin/games';
 $route['management/publishers'] = 'admin/publisher';
+$route['management/publishers/create'] = 'admin/createPublisher';
+$route['management/publishers/store'] = 'admin/storePublisher';
+$route['management/publishers/edit/(:any)'] = 'admin/editPublisher/$1';
+$route['management/publishers/delete/(:any)'] = 'admin/deletePublisher/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
