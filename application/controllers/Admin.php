@@ -55,7 +55,7 @@
       $page['title'] = 'Admin Publisher';
       $data["publishers"] = $this->admin_model->publishers();
       $this->load->view('templates/adminheader', $page);
-      $this->load->view('admin/publisher', $data);
+      $this->load->view('admin/publisher/publisher', $data);
       $this->load->view('templates/adminfooter');
     }
 
@@ -63,7 +63,7 @@
     {
       $page['title'] = 'Tambah Publisher';
       $this->load->view('templates/adminheader', $page);
-      $this->load->view('admin/publishercreate');
+      $this->load->view('admin/publisher/publishercreate');
       $this->load->view('templates/adminfooter');
     }
 
@@ -75,7 +75,7 @@
       if ($this->form_validation->run() === FALSE) {
         $page['title'] = 'Tambah Publisher';
         $this->load->view('templates/adminheader', $page);
-        $this->load->view('admin/publishercreate');
+        $this->load->view('admin/publisher/publishercreate');
         $this->load->view('templates/adminfooter');
       } else {
         $publisher = array (
@@ -106,22 +106,22 @@
         $page['title'] = 'Tambah Publisher';
         $data["publisher"] = $this->admin_model->show('game_publisher', $id);
         $this->load->view('templates/adminheader', $page);
-        $this->load->view('admin/publisheredit', $data);
+        $this->load->view('admin/publisher/publisheredit', $data);
         $this->load->view('templates/adminfooter');
       } else {
         $id = $this->input->post('id');
+        $old_cover = $this->input->post('old_cover');
         $data_update = array(
           'name' => $this->input->post('name'),
           'description' => $this->input->post('deskripsi'),
           'country' => $this->input->post('country'),
-          'cover' => ''
+          'cover' => $old_cover
         );
 
-        $old_cover = $this->input->post('old_cover');
-
-        if ($this->input->post('del_cover') == 1) {
+        if ($this->input->post('del_cover') == 'on') {
           $path = FCPATH."asset/src/images/".$old_cover;
           unlink($path);
+          $data_update["cover"] = "";
         }
 
         $cover = $this->uploadImage('cover');
@@ -155,6 +155,71 @@
       }
       
       return redirect(base_url('management/publishers'));
+    }
+
+    public function categories()
+    {
+      $page["title"] = "Kategori";
+      $data["categories"] = $this->admin_model->categories();
+      $this->load->view('templates/adminheader', $page);
+      $this->load->view('admin/category/categories', $data);
+      $this->load->view('templates/adminfooter');
+    }
+
+    public function storeCategories()
+    {
+       $this->form_validation->set_rules('name', 'Nama', 'required|min_length[3]');
+
+       if ($this->form_validation->run() === FALSE) {
+          $page["title"] = "Kategori";
+          $this->load->view('templates/adminheader', $page);
+          $this->load->view('admin/category/categoriescreate');
+          $this->load->view('templates/adminfooter');
+       } else {
+          $data = array("name" => html_escape($this->input->post('name')));
+          $query = $this->admin_model->create('game_categories', $data);
+          $this->session->set_flashdata('success', 'Berhasil ditambahkan');
+          return redirect(base_url('management/categories/store'));
+       }
+    }
+
+    public function editCategories($id)
+    {
+      $this->form_validation->set_rules('name', 'Nama', 'required|min_length[3]');
+      if ($this->form_validation->run() === FALSE) {
+          $page["title"] = "Kategori";
+          $data["category"] = $this->admin_model->show("game_categories", $id);
+          $this->load->view('templates/adminheader', $page);
+          $this->load->view('admin/category/categoriesedit', $data);
+          $this->load->view('templates/adminfooter');
+       } else {
+          $data = array("name" => html_escape($this->input->post('name')));
+          $query = $this->admin_model->updateData('game_categories', $data, $id);
+          $this->session->set_flashdata('success', 'Berhasil diupdate');
+          return redirect(base_url('management/categories'));
+       }
+    }
+
+    public function deleteCategories($id)
+    {
+      $this->admin_model->del('game_categories', $id);
+      $this->session->set_flashdata('success', 'Berhasil dihapus');
+      return redirect(base_url('management/categories'));
+    }
+
+    public function users()
+    {
+      
+    }
+
+    public function userDetail($id)
+    {
+
+    }
+
+    public function userLogs($id)
+    {
+
     }
 
   }

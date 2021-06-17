@@ -22,6 +22,14 @@
               ->result_array();
     }
 
+    public function categories()
+    {
+      $this->db->order_by('id', 'DESC');
+      return $this->db->from('game_categories')
+              ->get()
+              ->result_array();
+    }
+
     public function create($table, $data)
     {
       $this->db->insert($table, $data);

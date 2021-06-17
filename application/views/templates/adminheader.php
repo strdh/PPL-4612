@@ -54,7 +54,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url('management/games') ?>">Games</a>
-                                    <a class="nav-link" href="">Game Categories</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/categories') ?>">Game Categories</a>
                                     <a class="nav-link" href="<?php echo base_url('management/publishers') ?>">Publisher</a>
                                 </nav>
                             </div>
@@ -67,7 +67,6 @@
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="layout-static.html">Daftar user</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Di blokir</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Logs</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseForum" aria-expanded="false"

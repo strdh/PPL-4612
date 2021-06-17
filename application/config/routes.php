@@ -19,6 +19,10 @@ $route['management/publishers/create'] = 'admin/createPublisher';
 $route['management/publishers/store'] = 'admin/storePublisher';
 $route['management/publishers/edit/(:any)'] = 'admin/editPublisher/$1';
 $route['management/publishers/delete/(:any)'] = 'admin/deletePublisher/$1';
+$route['management/categories'] = 'admin/categories';
+$route['management/categories/store'] = 'admin/storeCategories';
+$route['management/categories/edit/(:any)'] = 'admin/editCategories/$1';
+$route['management/categories/delete/(:any)'] = 'admin/deleteCategories/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

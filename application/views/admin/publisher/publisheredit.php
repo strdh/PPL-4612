@@ -8,7 +8,7 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-pencil me-1"></i>
+                    <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
                     Edit Publisher
                 </div>
                 <div class="card-body">
@@ -46,7 +46,7 @@
                             <span class="badge bg-warning text-dark">Biarkan saja jika tidak ingin diganti</span>
                         </div><br>
                         <div class="col-sm-4">
-                            <input class="btn btn-primary" type="submit" value="Simpan">
+                            <input class="btn btn-primary" type="submit" value="Update">
                         </div><br>
                     </form>
                 </div>

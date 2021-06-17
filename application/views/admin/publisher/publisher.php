@@ -8,7 +8,7 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-body">
-                    <a href="<?php echo base_url('management/publishers/create') ?>" class="btn btn-success">Tambah</a>                .
+                    <a href="<?php echo base_url('management/publishers/create') ?>" class="btn btn-success">Tambah</a>
                 </div>
                 <?php if ($this->session->flashdata('success')) : ?>
                         <div class="alert alert-success alert-dismissible fade show col-sm-5" role="alert">
@@ -79,4 +79,4 @@
             </div>
         </div>
     </main>
-    
+

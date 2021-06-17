@@ -1,4 +1,3 @@
-
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Daftar Games</h1>
@@ -8,7 +7,7 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-body">
-                    <a href="" class="btn btn-success">Tambah</a>                .
+                    <a href="" class="btn btn-success">Tambah</a>
                 </div>
             </div>
             <div class="card mb-4">
@@ -53,16 +52,15 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                    <input type="text" class="form-control" id="recipient-name">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="message-text" class="col-form-label">Message:</label>
-                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                </div>
-                                            </form>
+                                            <h4><?php echo $data["title"] ?></h4>
+                                            <h4><?php echo $data["name"] ?></h4>
+                                            <div>
+                                                <?php if ($data["covers"] != NULL) :?>
+                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/'.$data["covers"]) ?>" alt="">
+                                                <?php else : ?>
+                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/dummy.jpg') ?>" alt="">
+                                                <?php endif ?>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                         </div>
