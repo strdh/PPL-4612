@@ -17,7 +17,7 @@
       $page['title'] = 'Admin Home';
 
       $this->load->view('templates/adminheader', $page);
-      $this->load->view('admin/home');
+      $this->load->view('admin/index');
       $this->load->view('templates/adminfooter');
     }
 
@@ -46,16 +46,16 @@
         $page['title'] = 'Admin Games';
 
         $this->load->view('templates/adminheader', $page);
-        $this->load->view('admin/games', $data);
+        $this->load->view('admin/game/games', $data);
         $this->load->view('templates/adminfooter');
     }
 
-    public function publisher()
+    public function publishers()
     {
       $page['title'] = 'Admin Publisher';
       $data["publishers"] = $this->admin_model->publishers();
       $this->load->view('templates/adminheader', $page);
-      $this->load->view('admin/publisher/publisher', $data);
+      $this->load->view('admin/publisher/publishers', $data);
       $this->load->view('templates/adminfooter');
     }
 
@@ -209,7 +209,11 @@
 
     public function users()
     {
-      
+      $page["title"] = "User";
+      $data["users"] = $this->admin_model->users();
+      $this->load->view('templates/adminheader', $page);
+      $this->load->view('admin/user/user', $data);
+      $this->load->view('templates/adminfooter');
     }
 
     public function userDetail($id)
@@ -221,5 +225,28 @@
     {
 
     }
+
+    public function isBlock($id)
+    {
+      $user = $this->admin_model->show("users", $id);
+      return ($user->status == "NONAKTIF") ? 1 : 0;
+    }
+
+    public function blockUser($id)
+    {
+      if ($this->isBlock($id) == 0)
+      $this->admin_model->updateData("users", array("status" => "NONAKTIF"), $id);
+      $this->session->set_flashdata('success', 'User '.$id." Di Blokir");
+      return redirect(base_url('management/users'));
+    }
+
+    public function unblockUser($id)
+    {
+      if ($this->isBlock($id) == 1)
+      $this->admin_model->updateData("users", array("status" => "AKTIF"), $id);
+      $this->session->set_flashdata('success', 'User '.$id." Di Pulihkan");
+      return redirect(base_url('management/users'));
+    }
+
 
   }

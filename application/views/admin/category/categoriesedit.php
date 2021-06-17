@@ -1,8 +1,8 @@
-<main>
+    <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Edit Kategori</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url('adminhome') ?>">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="<?php echo base_url('management/categories') ?>">Daftar Kategori</a></li>
                 <li class="breadcrumb-item active">Edit Kategori</li>
             </ol>

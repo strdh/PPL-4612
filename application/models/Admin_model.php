@@ -30,6 +30,21 @@
               ->result_array();
     }
 
+    public function users()
+    {
+      $this->db->order_by('id', 'DESC');
+      return $this->db->from('users')
+              ->get()
+              ->result_array();
+    }
+
+    public function userLogs($id)
+    {
+      $this->db->order_by('id', 'DESC');
+      return $this->db->get_where('logs', array('di' => $id))
+              ->result_array();
+    }
+
     public function create($table, $data)
     {
       $this->db->insert($table, $data);

@@ -23,9 +23,9 @@
           <!-- Login Form -->
         <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-        <input type="password" class="form-control" name="re_enter" placeholder="Konfirmasi Password">
+        <input type="password" class="form-control fadeIn second" name="re_enter" placeholder="Konfirmasi Password">
         <input type="text" id="email" class="fadeIn third" name="email" placeholder="email">
-        <input type="text" id="nama" class="fadeIn second" name="nama" placeholder="nama">
+        <input type="text" id="name" class="fadeIn second" name="nama" placeholder="nama">
         <input type="submit" class="fadeIn fourth" value="Join">
         
       

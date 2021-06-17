@@ -41,7 +41,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Main</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="<?php echo base_url('adminhome') ?>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Dashboard
                             </a>
@@ -65,7 +65,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Daftar user</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/users') ?>">Daftar user</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Di blokir</a>
                                 </nav>
                             </div>

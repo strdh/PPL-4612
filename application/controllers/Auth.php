@@ -25,7 +25,8 @@ class Auth extends CI_Controller{
                 'username' => $this->input->post('username'),
                 'password' => $password,
                 'email' => $this->input->post('email'),
-                'nama' => $this->input->post('nama')
+                'name' => $this->input->post('namE'),
+                'status' => 'AKTIF'
             );
 
             $this->auth_model->create('users', $data);
