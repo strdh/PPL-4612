@@ -77,14 +77,14 @@
                             </a>
                             <div class="collapse" id="collapseForum" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Daftar Forum</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/forums') ?>">Daftar Forum</a>
                                 </nav>
                             </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php echo $this->session->userdata("username") ?>
                     </div>
                 </nav>
             </div>

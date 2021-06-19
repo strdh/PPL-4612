@@ -28,6 +28,7 @@ $route['management/users/(:any)'] = 'admin/usersDetail/$1';
 $route['management/users/logs/(:any)'] = 'admin/userLogs/$1';
 $route['management/users/block/(:any)'] = 'admin/blockUser/$1';
 $route['management/users/unblock/(:any)'] = 'admin/unblockUser/$1';
+$route['management/forums'] = 'admin/forums';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

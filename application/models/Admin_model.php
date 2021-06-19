@@ -68,5 +68,19 @@
       $this->db->where('id', $id);
       return $this->db->delete($table);
     }
+
+    public function getNumRows($table)
+    {
+      $query = $this->db->get($table);
+      return $query->num_rows();      
+    }
+
+    public function forums()
+    {
+      $this->db->order_by('id', 'DESC');
+      return $this->db->from('forums')
+              ->get()
+              ->result_array();
+    }
     
   }

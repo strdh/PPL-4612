@@ -15,9 +15,17 @@
     public function home()
     {
       $page['title'] = 'Admin Home';
+      $data = array(
+        "games" => $this->admin_model->getNumRows("games"),
+        "publisher" => $this->admin_model->getNumRows("game_publisher"),
+        "category" => $this->admin_model->getNumRows("game_category"),
+        "users" => $this->admin_model->getNumRows("users"),
+        "forums" => $this->admin_model->getNumRows("forums"),
+        "comments" => $this->admin_model->getNumRows("forums_comments")
+      );
 
       $this->load->view('templates/adminheader', $page);
-      $this->load->view('admin/index');
+      $this->load->view('admin/index', $data);
       $this->load->view('templates/adminfooter');
     }
 
@@ -246,6 +254,15 @@
       $this->admin_model->updateData("users", array("status" => "AKTIF"), $id);
       $this->session->set_flashdata('success', 'User '.$id." Di Pulihkan");
       return redirect(base_url('management/users'));
+    }
+
+    public function forums()
+    {
+      $page["title"] = "User";
+      $data["forums"] = $this->admin_model->forums();
+      $this->load->view('templates/adminheader', $page);
+      $this->load->view('admin/forum/forums', $data);
+      $this->load->view('templates/adminfooter');
     }
 
 
