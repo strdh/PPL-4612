@@ -18,7 +18,7 @@
       $data = array(
         "games" => $this->admin_model->getNumRows("games"),
         "publisher" => $this->admin_model->getNumRows("game_publisher"),
-        "category" => $this->admin_model->getNumRows("game_category"),
+        "category" => $this->admin_model->getNumRows("game_categories"),
         "users" => $this->admin_model->getNumRows("users"),
         "forums" => $this->admin_model->getNumRows("forums"),
         "comments" => $this->admin_model->getNumRows("forums_comments")
@@ -52,10 +52,129 @@
     {
         $data["games"] = $this->admin_model->games();
         $page['title'] = 'Admin Games';
-
+        
         $this->load->view('templates/adminheader', $page);
         $this->load->view('admin/game/games', $data);
         $this->load->view('templates/adminfooter');
+    }
+
+    public function storeGame()
+    {
+      $this->form_validation->set_rules('title', 'Judul', 'required|min_length[5]');
+      $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|min_length[20]');
+      $this->form_validation->set_rules('release_date', 'Tanggal Rilis', 'required');
+      $this->form_validation->set_rules('categories[]', 'Kategori', 'required');
+
+      if ($this->form_validation->run() === FALSE) {
+        $page["title"] = "Games";
+        $data["publishers"] = $this->admin_model->publishers();
+        $categories = $this->admin_model->categories();
+        $name_cat = array();
+        foreach ($categories as $cat) {
+          array_push($name_cat, $cat["name"]);
+        }
+
+        $data["categories"] = $name_cat;
+
+        $this->load->view('templates/adminheader', $page);
+        $this->load->view('admin/game/gamecreate', $data);
+        $this->load->view('templates/adminfooter');
+      } else {
+        $game = array(
+          'title' => html_escape($this->input->post('title')),
+          'description' => $this->input->post('deskripsi'),
+          'release_date' => $this->input->post('release_date'),
+          'categories' => implode(" ", $this->input->post('categories')),
+          'difficulty' => $this->input->post('difficulty'),
+          'publisher_id' => $this->input->post('publisher_id'),
+          'rating_age' => $this->input->post('rating_age'),
+          'cover' => NULL
+        );
+
+        $cover = $this->uploadImage('cover');
+
+        if ($cover) {
+          $game["cover"] = $cover["upload_data"]["file_name"];
+        }
+
+        $this->admin_model->create('games', $game);
+        $this->session->set_flashdata('success', 'Berhasil disimpan');
+        redirect(base_url('management/games/store'));
+      }
+    }
+
+    public function editGame($id)
+    {
+      $this->form_validation->set_rules('title', 'Judul', 'required|min_length[5]');
+      $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|min_length[20]');
+      $this->form_validation->set_rules('release_date', 'Tanggal Rilis', 'required');
+      $this->form_validation->set_rules('categories[]', 'Kategori', 'required');
+
+      if ($this->form_validation->run() === FALSE) {
+        $page["title"] = "Games";
+        $data["game"] = $this->admin_model->show("games", $id);
+        $data["publishers"] = $this->admin_model->publishers();
+        $categories = $this->admin_model->categories();
+        $name_cat = array();
+        foreach ($categories as $cat) {
+          array_push($name_cat, $cat["name"]);
+        }
+
+        $data["categories"] = $name_cat;
+
+        $this->load->view('templates/adminheader', $page);
+        $this->load->view('admin/game/gameedit', $data);
+        $this->load->view('templates/adminfooter');
+      } else {
+        $old_cover = $this->input->post('old_cover');
+        $data_update = array(
+          'title' => html_escape($this->input->post('title')),
+          'description' => $this->input->post('deskripsi'),
+          'release_date' => $this->input->post('release_date'),
+          'categories' => implode(" ", $this->input->post('categories')),
+          'difficulty' => $this->input->post('difficulty'),
+          'publisher_id' => $this->input->post('publisher_id'),
+          'rating_age' => $this->input->post('rating_age'),
+          'cover' => $this->input->post('old_cover')
+        );
+
+        if ($this->input->post('del_cover') == 'on') {
+          $path = FCPATH."asset/src/images/".$old_cover;
+          unlink($path);
+          $data_update["cover"] = NULL;
+        }
+
+        $cover = $this->uploadImage('cover');
+
+        if ($cover) {
+           $data_update['cover'] = $cover['upload_data']['file_name'];
+           if ($old_cover != NULL) {
+             $path = FCPATH."asset/src/images/".$old_cover;
+             unlink($path);
+           }
+        }
+        
+        $this->admin_model->updateData('games', $data_update, $id);
+        $this->session->set_flashdata('success', 'Berhasil diupdate');
+        return redirect(base_url('management/games'));
+
+      }
+    }
+
+    public function deleteGame($id)
+    {
+      $data = $this->admin_model->show('games', $id);
+      $img = $data->cover; 
+      $path = FCPATH."asset/src/images/".$data->cover;
+
+      if ($query = $this->admin_model->del('games', $id)) {
+        if ($img != "dummy.jpg") unlink($path);
+        $this->session->set_flashdata('success', 'Berhasil dihapus');
+      } else {
+        $this->session->set_flashdata('danger', 'Gagal dihapus');
+      }
+
+      return redirect(base_url('management/games'));
     }
 
     public function publishers()

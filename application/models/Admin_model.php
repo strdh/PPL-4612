@@ -7,11 +7,12 @@
 
     public function games()
     {
-        $this->db->order_by('games.id', 'DESC');
-        return $this->db->from('games')
-            ->join('game_publisher', 'game_publisher.id=games.publisher_id')
-            ->get()
-            ->result_array();
+      $this->db->select('g.*, p.name')
+            ->from('games as g')
+            ->join('game_publisher as p', 'g.publisher_id = p.id')
+            ->order_by('g.id', 'DESC');
+      $query = $this->db->get();
+      return $query->result_array();
     }
 
     public function publishers()

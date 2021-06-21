@@ -7,7 +7,13 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-body">
-                    <a href="" class="btn btn-success">Tambah</a>
+                    <a href="<?php echo base_url('management/games/store') ?>" class="btn btn-success">Tambah</a>
+                    <?php if ($this->session->flashdata('success')) : ?>
+                    <div class="alert alert-success alert-dismissible fade show col-sm-5" role="alert">
+                        <?php echo $this->session->flashdata('success') ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
                 </div>
             </div>
             <div class="card mb-4">
@@ -36,10 +42,10 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="">
+                                        <a href="<?php echo base_url('management/games/edit/'.$data["id"]) ?>">
                                             <h6><i class="fas fa-edit"></i>Edit</h6>
                                         </a>
-                                        <a href="">
+                                        <a href="<?php echo base_url('management/games/delete/'.$data["id"]) ?>" onclick="return confirm('Yakin ingin dihapus')">
                                             <h6><i class="fas fa-trash-alt"></i>Hapus</h6>
                                         </a>
                                     </td>
@@ -47,23 +53,35 @@
                                 <div class="modal fade" id="modal<?php echo $data["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h4><?php echo $data["title"] ?></h4>
-                                            <h4><?php echo $data["name"] ?></h4>
-                                            <div>
-                                                <?php if ($data["covers"] != NULL) :?>
-                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/'.$data["covers"]) ?>" alt="">
-                                                <?php else : ?>
-                                                    <img class="col-sm-12" src="<?php echo base_url('asset/src/images/dummy.jpg') ?>" alt="">
-                                                <?php endif ?>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                        </div>
+                                            <div class="modal-body">
+                                                <h5>Judul : <?php echo $data["title"] ?></h5>
+                                                <h5>Publisher : <?php echo $data["name"] ?></h5>
+                                                <p><?php echo $data["description"] ?></p>
+                                                <h5>Kategori</h5>
+                                                <?php
+                                                    $arr = explode(" ", $data["categories"]);
+                                                    foreach ($arr as $a) :
+                                                ?>
+                                                    <span class="badge bg-success"><?php echo $a ?></span>
+                                                <?php endforeach ?>
+                                                <h5>Difficulty : <?php echo $data["difficulty"]?></h5>
+                                                <h5>Rating Age : <?php echo $data["rating_age"]?></h5>
+                                                <h5>Ratings : <?php echo $data["ratings"]?></h5>
+                                                <div>
+                                                    <?php if ($data["cover"] != NULL) :?>
+                                                        <img class="col-sm-12" src="<?php echo base_url('asset/src/images/'.$data["cover"]) ?>" alt="">
+                                                    <?php else : ?>
+                                                        <img class="col-sm-12" src="<?php echo base_url('asset/src/images/dummy.jpg') ?>" alt="">
+                                                    <?php endif ?>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
