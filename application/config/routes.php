@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //USERS
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'user/home';
 $route['createuser'] = 'auth/create';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';

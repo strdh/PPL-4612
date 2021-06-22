@@ -26,7 +26,7 @@
 
       public function home()
       {
-        $data['games'] = $this->user_model->getAllGames();
+        $data['games'] = $this->user_model->games();
         $this->load->view('templates/userheader');
         $this->load->view('users/index', $data);
         $this->load->view('templates/userfooter');
