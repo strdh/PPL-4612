@@ -17,7 +17,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
 
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="<?php echo base_url("home") ?>">Home</a>
+              <a class="nav-link" aria-current="page" href="<?php echo base_url("home") ?>">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -31,7 +31,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Forum</a>
+              <a class="nav-link" aria-current="page" href="#">Forum</a>
             </li>
             <li class="nav-item">
                <form class="d-flex">
@@ -39,12 +39,24 @@
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="<?php echo base_url("createuser") ?>">Join</a>
+            <?php if ($this->session->userdata('login_status') === NULL) : ?>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="<?php echo base_url("createuser") ?>">Join</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="<?php echo base_url("login") ?>">Login</a>
+              </li>
+            <?php else : ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php echo $this->session->userdata("username") ?>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="<?php echo base_url("profile/").$this->session->userdata("username") ?>">Profil</a></li>
+                  <li><a class="dropdown-item" href="<?php echo base_url("logout") ?>">Logout</a></li>
+                </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="<?php echo base_url("login") ?>">Login</a>
-            </li>
+            <?php endif ?>
           </ul>
         </div>
       </div>

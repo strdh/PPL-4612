@@ -14,4 +14,32 @@
       return $query->result_array();
     }
 
+    public function getUser($username)
+    {
+      $query = $this->db->get_where("users", array("username" => $username));
+      return $query->row();
+    }
+
+    public function isUniqueUsername($id, $param)
+    {
+      $this->db->select("username");
+      $this->db->where("id !=", $id);
+      $this->db->from("users");
+      $query = $this->db->get();
+      $data = $query->result_array();
+
+      foreach ($data as $username) {
+        if ($username == $param)
+          return False;
+      }
+      return True;
+    }
+
+    public function updateUser($data, $username)
+    {
+      $this->db->where('username', $username);
+      $this->db->set($data);
+      $this->db->update("users");
+    }
+
 }

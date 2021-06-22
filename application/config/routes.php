@@ -7,6 +7,7 @@ $route['createuser'] = 'auth/create';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['profile/(:any)'] = 'user/profile/$1';
+$route['profile/edit/(:any)'] = 'user/editProfile/$1';
 $route['home'] = 'user/home';
 
 //ADMIN
@@ -34,6 +35,7 @@ $route['management/users/block/(:any)'] = 'admin/blockUser/$1';
 $route['management/users/unblock/(:any)'] = 'admin/unblockUser/$1';
 $route['management/forums'] = 'admin/forums';
 
+$route['403page'] = 'user/noAccess';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
