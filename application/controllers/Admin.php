@@ -29,6 +29,16 @@
       $this->load->view('templates/adminfooter');
     }
 
+     public function notFound()
+      {
+         $this->load->view('errors/404');
+      }
+
+      public function isFound($param)
+      {
+        if ($param == NULL) return redirect(base_url("notfound"));
+      }
+
     public function uploadImage($form){
         $config = array(
           'upload_path' => './asset/src/images/',
@@ -113,6 +123,7 @@
       if ($this->form_validation->run() === FALSE) {
         $page["title"] = "Games";
         $data["game"] = $this->admin_model->show("games", $id);
+        $this->isFound($data["game"]);
         $data["publishers"] = $this->admin_model->publishers();
         $categories = $this->admin_model->categories();
         $name_cat = array();
@@ -232,6 +243,7 @@
       if ($this->form_validation->run() === FALSE) {
         $page['title'] = 'Tambah Publisher';
         $data["publisher"] = $this->admin_model->show('game_publisher', $id);
+        $this->isFound($data["publisher"]);
         $this->load->view('templates/adminheader', $page);
         $this->load->view('admin/publisher/publisheredit', $data);
         $this->load->view('templates/adminfooter');

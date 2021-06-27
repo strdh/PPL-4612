@@ -35,7 +35,7 @@ $route['management/users/block/(:any)'] = 'admin/blockUser/$1';
 $route['management/users/unblock/(:any)'] = 'admin/unblockUser/$1';
 $route['management/forums'] = 'admin/forums';
 
-$route['403page'] = 'user/noAccess';
+$route['notfound'] = 'user/notFound';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

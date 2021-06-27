@@ -20,9 +20,20 @@
         $this->load->view('templates/userfooter');
       }
 
+      public function notFound()
+      {
+         $this->load->view('errors/404');
+      }
+
+      public function isFound($param)
+      {
+        if ($param == NULL) return redirect(base_url("notfound"));
+      }
+
       public function profile($username)
       {
         $data["user"] = $this->user_model->getUser($username);
+        $this->isFound($data["user"]);
         $this->load->view('templates/userheader');
         $this->load->view('users/profile/profile', $data);
         $this->load->view('templates/userfooter');
@@ -105,7 +116,7 @@
         }
       }
 
-      public function noAccess()
+      public function gameDetail()
       {
 
       }
