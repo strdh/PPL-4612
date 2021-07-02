@@ -9,6 +9,7 @@ $route['logout'] = 'auth/logout';
 $route['profile/(:any)'] = 'user/profile/$1';
 $route['profile/edit/(:any)'] = 'user/editProfile/$1';
 $route['home'] = 'user/home';
+$route['game/(:any)'] = 'user/gameDetail/$1';
 
 //ADMIN
 $route['loginadmin'] = 'auth/loginAdmin';

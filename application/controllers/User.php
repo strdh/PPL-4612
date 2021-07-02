@@ -116,9 +116,13 @@
         }
       }
 
-      public function gameDetail()
+      public function gameDetail($id)
       {
-
+        $data["game"] = $this->user_model->getGame($id);
+        $this->isFound($data["game"]);
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/game', $data);
+        $this->load->view('templates/userfooter');
       }
 
 

@@ -42,4 +42,16 @@
       $this->db->update("users");
     }
 
+    public function getGame($id)
+    {
+      // $query = $this->db->get_where("games", array("id" => $id));
+      // return $query->row();
+      $this->db->select('g.*, p.name')
+            ->from('games as g')
+            ->join('game_publisher as p', 'g.publisher_id = p.id')
+            ->where('g.id=', $id);
+      $query = $this->db->get();
+      return $query->row();
+    }
+
 }

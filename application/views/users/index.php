@@ -22,7 +22,7 @@
                   <p class="card-text"><?php echo $data["title"] ?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <a href="<?php echo base_url('game/').$data['id'] ?>" class="btn btn-sm btn-success">View</a>
                     </div>
                     <small class="text-muted"></small>
                     <span class="badge bg-primary"><?php echo $data["rating_age"] ?> +</span>
