@@ -9,11 +9,11 @@
                 <div class="card-body">
                     <a href="<?php echo base_url('management/games/store') ?>" class="btn btn-success">Tambah</a>
                     <?php if ($this->session->flashdata('success')) : ?>
-                    <div class="alert alert-success alert-dismissible fade show col-sm-5" role="alert">
-                        <?php echo $this->session->flashdata('success') ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif ?>
+                        <div class="alert alert-success alert-dismissible fade show col-sm-5" role="alert">
+                            <?php echo $this->session->flashdata('success') ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif ?>
                 </div>
             </div>
             <div class="card mb-4">

@@ -66,15 +66,22 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Aktif di forum</h6>
-                
+                      <h6 class="d-flex align-items-center mb-3">Game yang dimainkan</h6>
+                      <ul class="list-group">
+                        <?php foreach($games as $g) : ?>
+                          <li class="list-group-item">
+                            <?php echo $g["title"]." " ?>
+                            <span class="badge bg-primary"><?php echo $g["user_game_id"] ?></span>
+                          </li>
+                        <?php endforeach ?>
+                      </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Game yang dimainkan</h6>
+                      <h6 class="d-flex align-items-center mb-3">Aktif di forum</h6>
                       
                     </div>
                   </div>

@@ -10,6 +10,11 @@ $route['profile/(:any)'] = 'user/profile/$1';
 $route['profile/edit/(:any)'] = 'user/editProfile/$1';
 $route['home'] = 'user/home';
 $route['game/(:any)'] = 'user/gameDetail/$1';
+$route['game/rating/(:any)/(:any)'] = 'user/giveRating/$1/$2';
+$route['game/play/(:any)'] = 'user/playGame/$1';
+$route['game/forum/(:any)'] = 'user/forum/$1';
+$route['game/forum/comment/(:any)'] = 'user/comment/$1';
+$route['readComment/(:any)'] = 'user/readComment/$1';
 
 //ADMIN
 $route['loginadmin'] = 'auth/loginAdmin';

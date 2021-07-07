@@ -98,6 +98,7 @@
           'difficulty' => $this->input->post('difficulty'),
           'publisher_id' => $this->input->post('publisher_id'),
           'rating_age' => $this->input->post('rating_age'),
+          'ratings' => 0,
           'cover' => NULL
         );
 
@@ -362,7 +363,12 @@
 
     public function userLogs($id)
     {
-
+      $page["title"] = "User Logs";
+      $data["logs"] = $this->admin_model->getUserLogs($id);
+      //$this->isFound($data["logs"]);
+      $this->load->view('templates/adminheader', $page);
+      $this->load->view('admin/user/log', $data);
+      $this->load->view('templates/adminfooter');
     }
 
     public function isBlock($id)

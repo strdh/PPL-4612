@@ -83,5 +83,16 @@
               ->get()
               ->result_array();
     }
+
+    public function getUserLogs($id)
+    {
+      $this->db->select('u.*, l.*')
+                ->from('users as u')
+                ->join('logs as l', 'l.id_user = u.id')
+                ->where('l.id_user', $id)
+                ->order_by('l.id', 'DESC');
+      $query = $this->db->get();
+      return $query->result_array();
+    }
     
   }

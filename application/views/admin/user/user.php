@@ -47,7 +47,7 @@
                                     </td>
                                     <td>
                                         <a href=""><i class="fas fa-comments"></i>Forums</a>|
-                                        <a href=""><i class="fas fa-history"></i>Logs</a>| 
+                                        <a href="<?php echo base_url('management/users/logs/').$data["id"] ?>"><i class="fas fa-history"></i>Logs</a>| 
                                         <?php if ($data["status"] == "AKTIF") : ?>
                                             <a href="<?php echo base_url('management/users/block/'.$data["id"]) ?>" onclick="return confirm('Yakin ingin diblokir ?')">
                                                 <i class="fas fa-ban"></i>Block

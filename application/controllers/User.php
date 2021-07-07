@@ -30,10 +30,23 @@
         if ($param == NULL) return redirect(base_url("notfound"));
       }
 
+      public function saveLog($data)
+      {
+        $this->user_model->create("logs", $data);
+      }
+
+      public function isLogin()
+      {
+        if ($this->session->userdata('id') === NULL) return False;
+        else return True;
+      }
+
       public function profile($username)
       {
         $data["user"] = $this->user_model->getUser($username);
         $this->isFound($data["user"]);
+        //var_dump($data["user"]->id);
+        $data["games"] = $this->user_model->getPlayedGame($data["user"]->id);
         $this->load->view('templates/userheader');
         $this->load->view('users/profile/profile', $data);
         $this->load->view('templates/userfooter');
@@ -103,7 +116,13 @@
                }
               }
 
+              $data_log = array (
+                "id_user" => $this->session->userdata("id"),
+                "activity" => "Melakukan edit profil"
+              );
+
               $this->user_model->updateUser($data_update, $username);
+              $this->saveLog($data_log);
               $this->session->set_flashdata('success', 'Berhasil diupdate');
               return redirect(base_url('profile/'.$this->session->userdata("username")));
               
@@ -120,10 +139,106 @@
       {
         $data["game"] = $this->user_model->getGame($id);
         $this->isFound($data["game"]);
+        $data["rating"] = $this->user_model->getRateList($id);
+        $data["player"] = $this->user_model->getPlayerList($id);
         $this->load->view('templates/userheader');
         $this->load->view('users/game/game', $data);
         $this->load->view('templates/userfooter');
       }
 
+      public function giveRating($id_game, $value)
+      {
+        if ($this->isLogin()) {
+          $id_user = $this->session->userdata("id");
+          if ($this->user_model->isRated($id_game, $id_user) === NULL) {
+            $this->user_model->giveRate($id_game, $id_user, $value);
+            $data_log = array (
+                "id_user" => $id_user,
+                "activity" => "Memberi rating bintang ".$value." Kepada game ".$id_game,
+            );
+            $this->saveLog($data_log);
+            $this->session->set_flashdata('success', 'Berhasil memberi rating');
+            return redirect(base_url('game/'.$id_game));
+          } else {
+            $this->session->set_flashdata('warning', 'Anda Sudah memberi rating');
+            return redirect(base_url('game/'.$id_game));
+          }
+        } else {
+          return redirect(base_url('login'));
+        }
+      }
+
+      public function playGame($id_game)
+      {
+        if ($this->isLogin()) {
+          $id_user = $this->session->userdata("id");
+          if ($this->user_model->isPlayed($id_user, $id_game) === NULL) {
+            $this->form_validation->set_rules('user_game_id', 'Game ID', 'required');
+            if ($this->form_validation->run() === FALSE) {
+              $this->session->set_flashdata('warning', 'Lengkapi data');
+              return redirect(base_url('game/'.$id_game));
+            } else {
+              $data = array(
+                "id_user" => $id_user,
+                "id_game" => $id_game,
+                "user_game_id" => $this->input->post('user_game_id')
+              );
+
+              $this->user_model->create("game_players", $data);
+              $this->session->set_flashdata('success', 'Berhasil');
+              return redirect(base_url('game/'.$id_game));
+            }
+          } else {
+            $this->session->set_flashdata('warning', 'Anda Sudah Bermain');
+            return redirect(base_url('game/'.$id_game));
+          }
+        } else {
+          return redirect(base_url('login'));
+        }
+      }
+
+      
+      public function forum($id)
+      {
+        $data["forum"] = $this->user_model->getForum($id);
+        $this->isFound($data["forum"]);
+        //var_dump($data["forum"]);
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/forum', $data);
+        $this->load->view('templates/userfooter');
+      }
+
+      public function comment($data_param)
+      {
+        if ($this->isLogin()) {
+          $username = $this->session->userdata("username");
+          $comment = $this->input->post('comment');
+
+          $data_comment = array(
+            "id_forum" => $data_param,
+            "username" => $username,
+            "comment" => $comment
+          );
+
+          $this->user_model->comment($data_comment);
+          
+          $data_log = array(
+            "id_user" => $this->session->userdata("id"),
+            "activity" => "Berkomentar di forum ".$data_param
+          );
+
+          $this->saveLog($data_log);
+          
+          //redirect(base_url('game/forum/').$data_param);
+          
+        } else {
+          redirect(base_url('login'));
+        }
+      }
+
+      public function readComment($id_forum){
+        $data = $this->user_model->getComment($id_forum);
+        echo json_encode($data);
+      }
 
   }
