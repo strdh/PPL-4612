@@ -14,7 +14,7 @@ class Auth extends CI_Controller{
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
         $this->form_validation->set_rules('re_enter', 'Konformasi Password', 'required|matches[password]');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('name', 'Nama', 'required');
 
         if($this->form_validation->run() === FALSE){      
             $this->load->view('auth/create');       
@@ -25,7 +25,8 @@ class Auth extends CI_Controller{
                 'username' => $this->input->post('username'),
                 'password' => $password,
                 'email' => $this->input->post('email'),
-                'nama' => $this->input->post('nama')
+                'name' => $this->input->post('name'),
+                'status' => 'AKTIF'
             );
 
             $this->auth_model->create('users', $data);
@@ -53,7 +54,7 @@ class Auth extends CI_Controller{
                         'login_status' => TRUE
                     );
                     $this->session->set_userdata($session_user);
-                    redirect(base_url('profile/'.$session_user["id"]));
+                    redirect(base_url('profile/'.$session_user["username"]));
                 }else{
                     $this->session->set_userdata('msg', TRUE);
                     redirect(base_url('login'));
@@ -98,7 +99,7 @@ class Auth extends CI_Controller{
   public function logout()
   {
     $this->session->sess_destroy();
-    redirect(base_url('login'));
+    redirect(base_url('home'));
   }
 
   public function logoutadmin()

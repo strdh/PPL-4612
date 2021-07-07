@@ -9,7 +9,12 @@
         <title>Admin GSC</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?php echo base_url('asset/css/') ?>style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="//cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
         
     </head>
     <body class="sb-nav-fixed">
@@ -40,7 +45,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Main</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="<?php echo base_url('adminhome') ?>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Dashboard
                             </a>
@@ -53,7 +58,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url('management/games') ?>">Games</a>
-                                    <a class="nav-link" href="">Game Categories</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/categories') ?>">Game Categories</a>
                                     <a class="nav-link" href="<?php echo base_url('management/publishers') ?>">Publisher</a>
                                 </nav>
                             </div>
@@ -64,9 +69,8 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Daftar user</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/users') ?>">Daftar user</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Di blokir</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Logs</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseForum" aria-expanded="false"
@@ -77,14 +81,14 @@
                             </a>
                             <div class="collapse" id="collapseForum" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Daftar Forum</a>
+                                    <a class="nav-link" href="<?php echo base_url('management/forums') ?>">Daftar Forum</a>
                                 </nav>
                             </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php echo $this->session->userdata("username") ?>
                     </div>
                 </nav>
             </div>
