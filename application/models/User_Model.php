@@ -158,8 +158,14 @@
 
     public function getComment($id_forum)
     {
+      $this->db->order_by("id_comment", "DESC");
       $query = $this->db->get_where("forum_comments", array('id_forum' => $id_forum));
       return $query->result();
+    }
+
+    public function getAll($table)
+    {
+      return $this->db->get($table)->result_array();
     }
 
 

@@ -6,7 +6,7 @@
                         </ol>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
-                                <a href="">
+                                <a href="<?php echo base_url('management/games/') ?>">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Games</h6>
@@ -16,7 +16,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <a href="">
+                                <a href="<?php echo base_url('management/publishers/') ?>">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Publisher</h6>
@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <a href="">
+                                <a href="<?php echo base_url('management/categories/') ?>">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Games Category</h6>
@@ -36,7 +36,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <a href="">
+                                <a href="<?php echo base_url('management/users/') ?>">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Users</h6>
@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <a href="">
+                                <a href="<?php echo base_url('management/forums/') ?>">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Forums</h6>

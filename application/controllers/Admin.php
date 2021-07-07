@@ -21,7 +21,7 @@
         "category" => $this->admin_model->getNumRows("game_categories"),
         "users" => $this->admin_model->getNumRows("users"),
         "forums" => $this->admin_model->getNumRows("forums"),
-        "comments" => $this->admin_model->getNumRows("forums_comments")
+        "comments" => $this->admin_model->getNumRows("forum_comments")
       );
 
       $this->load->view('templates/adminheader', $page);
@@ -400,6 +400,35 @@
       $this->load->view('templates/adminheader', $page);
       $this->load->view('admin/forum/forums', $data);
       $this->load->view('templates/adminfooter');
+    }
+
+    public function storeForum()
+    {
+       $this->form_validation->set_rules('game_id', 'ID Game', 'required');
+
+       if ($this->form_validation->run() === FALSE) {
+          $page["title"] = "Kategori";
+          $data["games"] = $this->admin_model->games();
+          $this->load->view('templates/adminheader', $page);
+          $this->load->view('admin/forum/forumcreate', $data);
+          $this->load->view('templates/adminfooter');
+       } else {
+          $data_temp = explode(",", $this->input->post('game_id'));
+          $data = array(
+            "name" => $data_temp[1],
+            "game_id" => $data_temp[0]
+          );
+          $query = $this->admin_model->create('forums', $data);
+          $this->session->set_flashdata('success', 'Berhasil ditambahkan');
+          return redirect(base_url('management/forums/store'));
+       }
+    }
+
+    public function deleteForum($id)
+    {
+      $this->admin_model->del('forums', $id);
+      $this->session->set_flashdata('success', 'Berhasil dihapus');
+      return redirect(base_url('management/forums'));
     }
 
 

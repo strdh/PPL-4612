@@ -25,13 +25,12 @@
                 Game
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">All</a></li>
-                <li><a class="dropdown-item" href="#">Categories</a></li>
-                <li><a class="dropdown-item" href="#">Publisher</a></li>
+                <li><a class="dropdown-item" href="<?php echo base_url("gamecategories") ?>">Categories</a></li>
+                <li><a class="dropdown-item" href="<?php echo base_url("gamepublisher") ?>">Publisher</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Forum</a>
+              <a class="nav-link" aria-current="page" href="<?php echo base_url("gameforum") ?>">Forum</a>
             </li>
             <li class="nav-item">
                <form class="d-flex">

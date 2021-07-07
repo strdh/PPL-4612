@@ -89,7 +89,13 @@
                       <h6 class="mb-0">Rating</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <h4 class="badge bg-warning"><?php echo ($game->ratings / count($rating)) ?>/5</h4>
+                      <h4 class="badge bg-warning">
+                        <?php 
+                          if (count($rating) != 0) {
+                            echo ($game->ratings / count($rating));
+                          }
+                        ?>/5
+                      </h4>
                     </div>
                   </div>
                   <hr>

@@ -4,8 +4,8 @@
              <h1>Forum <?php echo $forum->name ?></h1>
 
                  <?php if (!$this->session->userdata('admin')):
-                   $data_comment = $forum->id;
-                   echo form_open(base_url('game/forum/comment/').$data_comment);
+                   //$data_comment = $forum->id;
+                   echo form_open(base_url('game/forum/comment/').$forum->id."/".$forum->game_id);
                    echo validation_errors(); ?>
 
                    <div class="form-group col-sm-5">
@@ -50,14 +50,14 @@
           dataType : 'json',
           success : function(data){
 
-            var id = "<?php echo $this->session->userdata('id') ?>";
+            var id = "<?php echo $this->session->userdata('username') ?>";
             var html = '';
             var i;
             for(i =0; i<data.length; i++){
               var del_url = "<?php echo base_url('delcomment/') ?>" + data[i].id_comment;
               var id_del = "comm"+data[i].id_comment;
-              var del = (data[i].id_user == id) ? "<a onclick='delComment("+data[i].id_comment+")' class='del badge badge-danger' href='javascript:;'>hapus komentar</a>" : "";
-              var li = (data[i].id_user == id) ? '<li id='+id_del+' class = "self">' : '<li class = "other">';
+              var del = (data[i].username == id) ? "<a onclick='delComment("+data[i].id_comment+")' class='del badge badge-danger' href='javascript:;'>hapus komentar</a>" : "";
+              var li = (data[i].username == id) ? '<li id='+id_del+' class = "self">' : '<li class = "other">';
               html += li + '<p>'+ data[i].username + ' || '+ data[i].time + ' || ' + del + '<br><br>' + data[i].comment + '<br></p></li>';
             }
             $('.comm').html(html);

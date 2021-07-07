@@ -3,3 +3,30 @@
     height: 15vw;
     object-fit: cover;
 }
+
+ .other{
+    background-color: rgb(5, 173, 210);
+    color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+  }
+
+  .self{
+    background-color:rgb(85, 201, 170);
+    color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+  }
+
+  .kotak{
+    background: rgb(79, 84, 191);
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    width: 10rem;
+    text-decoration: none;
+  }
+
+  .kotak:hover{
+    background: rgb(2, 193, 227);
+  }

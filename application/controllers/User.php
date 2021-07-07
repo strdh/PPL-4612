@@ -208,11 +208,13 @@
         $this->load->view('templates/userfooter');
       }
 
-      public function comment($data_param)
+      public function comment($data_param, $id_forum)
       {
         if ($this->isLogin()) {
           $username = $this->session->userdata("username");
           $comment = $this->input->post('comment');
+
+          //echo $id_forum;
 
           $data_comment = array(
             "id_forum" => $data_param,
@@ -229,7 +231,7 @@
 
           $this->saveLog($data_log);
           
-          //redirect(base_url('game/forum/').$data_param);
+          redirect(base_url('game/forum/').$id_forum);
           
         } else {
           redirect(base_url('login'));
@@ -239,6 +241,32 @@
       public function readComment($id_forum){
         $data = $this->user_model->getComment($id_forum);
         echo json_encode($data);
+      }
+
+      public function getCategory()
+      {
+        //echo "Hahah";
+        $data["categories"] = $this->user_model->getAll("game_categories");
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/category', $data);
+        $this->load->view('templates/userfooter');
+      }
+
+      public function getPublisher()
+      {
+        //echo "Hahah";
+        $data["publisher"] = $this->user_model->getAll("game_publisher");
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/publisher', $data);
+        $this->load->view('templates/userfooter');
+      }
+
+      public function getForum()
+      {
+        $data["forum"] = $this->user_model->getAll("forums");
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/forum_list', $data);
+        $this->load->view('templates/userfooter');
       }
 
   }
