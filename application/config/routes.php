@@ -18,6 +18,7 @@ $route['gamecategories'] = 'user/getCategory';
 $route['gamepublisher'] = 'user/getPublisher';
 $route['gameforum'] = 'user/getForum';
 $route['readComment/(:any)'] = 'user/readComment/$1';
+$route["search"] = 'user/search';
 
 //ADMIN
 $route['loginadmin'] = 'auth/loginAdmin';
