@@ -269,4 +269,13 @@
         $this->load->view('templates/userfooter');
       }
 
+      public function search()
+      {
+        $keyword = $this->input->post("keyword");
+        $data["games"] = $this->user_model->searchGame($keyword);
+        $this->load->view('templates/userheader');
+        $this->load->view('users/game/search', $data);
+        $this->load->view('templates/userfooter');
+      }
+
   }

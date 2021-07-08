@@ -33,8 +33,9 @@
               <a class="nav-link" aria-current="page" href="<?php echo base_url("gameforum") ?>">Forum</a>
             </li>
             <li class="nav-item">
-               <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <?php echo form_open('search', 'class="d-flex"') ?>
+                 
+                  <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search" required>
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </li>
