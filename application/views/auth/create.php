@@ -15,6 +15,7 @@
           <!-- Tabs Titles -->
           <h2 class="inactive underlineHover"><a href="<?php echo base_url('login') ?>">Sign In</a></h2>
           <h2 class="active"><a href="signup.html">Sign Up</a></h2>
+          <h2 class="inactive underlineHover"><a href="<?php echo base_url("home") ?>">Home</a></h2>
       
           <!-- Icon -->
           <div class="fadeIn first">

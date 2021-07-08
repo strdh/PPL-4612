@@ -168,6 +168,14 @@
       return $this->db->get($table)->result_array();
     }
 
+    public function searchGame($keyword)
+    {
+      $this->db->select("*");
+      $this->db->from("games");
+      $this->db->like("title", $keyword);
+      return $this->db->get()->result_array();
+    }
+
 
 
 }
